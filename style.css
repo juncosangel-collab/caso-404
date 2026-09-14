@@ -1,1 +1,325 @@
-*{box-sizing:border-box}body{margin:0;background:#05090d;color:#d9faff;font:14px 'Courier New',monospace}header{padding:18px 5%;display:flex;justify-content:space-between;align-items:center;background:#080f14;border-bottom:1px solid #214957}header b,em,h1,h2,h3{color:#69e2ff}h1{font-size:24px;margin:8px 0}small{color:#78939b}.clock{border:1px solid #69e2ff;padding:10px 20px;text-align:center}.clock strong{display:block;color:#69e2ff;font-size:27px}.bar{height:5px;background:#111a20}.bar i{display:block;height:100%;width:0;background:#69e2ff;transition:.3s}main{width:min(1150px,92%);margin:30px auto}.screen{display:none}.active{display:block}.panel,.choice,.card{background:#0a141a;border:1px solid #294650;padding:20px;margin-bottom:15px}.danger{border-color:#8c424b}.warning{border:1px solid #9c4d4d;padding:12px;color:#ff9191;margin-top:18px}label{display:block;color:#9bb6be;margin:14px 0 6px}input,textarea{width:100%;background:#04070a;border:1px solid #34515b;color:white;padding:12px;font:inherit}textarea{min-height:110px;resize:vertical}button{margin-top:18px;padding:12px 20px;background:#69e2ff;color:#061016;border:0;font:inherit;font-weight:bold;cursor:pointer}button:disabled{opacity:.3;cursor:not-allowed}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px}.choice,.card{cursor:pointer;transition:.15s}.choice:hover,.card:hover{border-color:#69e2ff;transform:translateY(-2px)}.selected{border-color:#69e2ff;background:#10232b;box-shadow:0 0 14px #69e2ff22}.choice h3,.card h3{margin:0 0 8px}.choice p,.card p{color:#8fa6ad;line-height:1.5}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.metrics span{background:#091117;border:1px solid #294650;padding:14px;text-align:center;color:#78939b}.metrics b{display:block;color:#69e2ff;font-size:22px;margin-top:5px}.final{text-align:center;padding:55px 25px}.final pre{text-align:left;max-width:600px;margin:25px auto;border:1px solid #294650;padding:18px;color:#65ff9a;line-height:2;white-space:pre-wrap}.overlay{display:none;position:fixed;inset:0;background:#000e;align-items:center;justify-content:center;z-index:5}.overlay.active{display:flex}.overlay>div{width:min(480px,90%);background:#0a151b;border:1px solid #69e2ff;padding:40px;text-align:center}.overlay big{font-size:45px}@media(max-width:700px){header{flex-direction:column;gap:15px;text-align:center}.metrics{grid-template-columns:repeat(2,1fr)}}
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #05090d;
+    color: #d9faff;
+    font: 14px 'Courier New', monospace;
+}
+
+
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
+
+header {
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #080f14;
+    border-bottom: 1px solid #214957;
+}
+
+header b,
+em,
+h1,
+h2,
+h3 {
+    color: #69e2ff;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 8px 0;
+}
+
+small {
+    color: #78939b;
+}
+
+
+/* =========================================================
+   TEMPORIZADOR
+   ========================================================= */
+
+.clock {
+    border: 1px solid #69e2ff;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.clock strong {
+    display: block;
+    color: #69e2ff;
+    font-size: 27px;
+}
+
+
+/* =========================================================
+   BARRA DE PROGRESO
+   ========================================================= */
+
+.bar {
+    height: 5px;
+    background: #111a20;
+}
+
+.bar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: #69e2ff;
+    transition: 0.3s;
+}
+
+
+/* =========================================================
+   CONTENIDO PRINCIPAL
+   ========================================================= */
+
+main {
+    width: min(1150px, 92%);
+    margin: 30px auto;
+}
+
+
+/* =========================================================
+   PANTALLAS / FASES
+   ========================================================= */
+
+.screen {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+
+/* =========================================================
+   PANELES Y TARJETAS
+   ========================================================= */
+
+.panel,
+.choice,
+.card {
+    background: #0a141a;
+    border: 1px solid #294650;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.choice,
+.card {
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.choice:hover,
+.card:hover {
+    border-color: #69e2ff;
+    transform: translateY(-2px);
+}
+
+.selected {
+    border-color: #69e2ff;
+    background: #10232b;
+    box-shadow: 0 0 14px #69e2ff22;
+}
+
+
+/* =========================================================
+   TEXTO DE TARJETAS
+   ========================================================= */
+
+.choice h3,
+.card h3 {
+    margin: 0 0 8px;
+}
+
+.choice p,
+.card p {
+    color: #8fa6ad;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ALERTAS
+   ========================================================= */
+
+.danger {
+    border-color: #8c424b;
+}
+
+.warning {
+    border: 1px solid #9c4d4d;
+    padding: 12px;
+    color: #ff9191;
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   FORMULARIOS
+   ========================================================= */
+
+label {
+    display: block;
+    color: #9bb6be;
+    margin: 14px 0 6px;
+}
+
+input,
+textarea {
+    width: 100%;
+    background: #04070a;
+    border: 1px solid #34515b;
+    color: white;
+    padding: 12px;
+    font: inherit;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+button {
+    margin-top: 18px;
+    padding: 12px 20px;
+    background: #69e2ff;
+    color: #061016;
+    border: 0;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   GRILLAS
+   ========================================================= */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(240px, 1fr)
+    );
+    gap: 13px;
+}
+
+
+/* =========================================================
+   MÉTRICAS
+   ========================================================= */
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.metrics span {
+    background: #091117;
+    border: 1px solid #294650;
+    padding: 14px;
+    text-align: center;
+    color: #78939b;
+}
+
+.metrics b {
+    display: block;
+    color: #69e2ff;
+    font-size: 22px;
+    margin-top: 5px;
+}
+
+
+/* =========================================================
+   PANTALLA FINAL
+   ========================================================= */
+
+.final {
+    text-align: center;
+    padding: 55px 25px;
+}
+
+.final pre {
+    text-align: left;
+    max-width: 600px;
+    margin: 25px auto;
+    border: 1px solid #294650;
+    padding: 18px;
+    color: #65ff9a;
+    line-height: 2;
+    white-space: pre-wrap;
+}
+
+
+/* =========================================================
+   VENTANA DE BLOQUEO
+   ========================================================= */
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #000e;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.overlay > div {
+    width: min(480px, 90%);
+    background: #0a151b;
+    border: 1px solid #69e2ff;
+    padding: 40px;
+    text-align: center;
+}
+
+.overlay big {
+    font-size: 45px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — CELULARES
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

@@ -1,17 +1,557 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CASO 404 // BLACKOUT</title><link rel="stylesheet" href="style.css"></head><body><header><div><b>● SISTEMA ACTIVO // BLACKOUT</b><h1>CASO 404 // PROTOCOLO ORÁCULO</h1><small>SIMULACIÓN FORENSE DE CRISIS DIGITAL</small></div><div class="clock"><small>TIEMPO</small><strong id="timer">18:00</strong></div></header><div class="bar"><i id="progress"></i></div><main>
-<section id="start" class="screen active"><article class="panel danger"><em>NIVEL BLACKOUT // EXTREMO</em><h2>PROTOCOLO ORÁCULO</h2><p>Un incidente digital está propagándose dentro de una comunidad educativa. Hay capturas, registros, testimonios y archivos que no coinciden entre sí.</p><p>Reconstruyan la cadena, detecten anomalías, investiguen fuentes y decidan cómo intervenir.</p><div class="warning">⚠ LAS DECISIONES SELLADAS SON IRREVERSIBLES. EL PUNTAJE ESTÁ OCULTO.</div></article><article class="panel"><h3>IDENTIFICACIÓN</h3><label>Nombre del grupo</label><input id="group"><label>Integrantes</label><textarea id="members"></textarea><button onclick="startGame()">INICIAR PROTOCOLO</button></article></section>
-<section id="p1" class="screen"><h2>FASE 01 / RECONSTRUCCIÓN</h2><p>Analicen la secuencia. El orden temporal no implica causalidad.</p><div id="timeline" class="grid"></div><button onclick="seal(1)">SELLAR RECONSTRUCCIÓN</button></section>
-<section id="p2" class="screen"><h2>FASE 02 / FORENSE</h2><p>Seleccionen exactamente 6 evidencias.</p><div id="evidence" class="grid"></div><p>SELECCIONADAS: <b id="ec">0 / 6</b></p><button id="eb" disabled onclick="seal(2)">SELLAR EVIDENCIAS</button></section>
-<section id="p3" class="screen"><h2>FASE 03 / CRUCE</h2><p>Seleccionen 4 relaciones que consideren demostradas.</p><div id="cross" class="grid"></div><p>RELACIONES: <b id="cc">0 / 4</b></p><button id="cb" disabled onclick="seal(3)">SELLAR MATRIZ</button></section>
-<section id="p4" class="screen"><h2>FASE 04 / CONTRADICCIONES</h2><p>Seleccionen 3 contradicciones reales.</p><div id="contr" class="grid"></div><p>CONTRADICCIONES: <b id="kc">0 / 3</b></p><button id="kb" disabled onclick="seal(4)">SELLAR CONTRADICCIONES</button></section>
-<section id="p5" class="screen"><h2>FASE 05 / HIPÓTESIS</h2><p>Elijan una hipótesis y 3 evidencias. Registren una anomalía si detectaron alguna.</p><div id="hyp" class="grid"></div><div id="he" class="grid"></div><textarea id="anomaly" placeholder="Anomalía detectada..."></textarea><button id="hb" disabled onclick="seal(5)">SELLAR HIPÓTESIS</button></section>
-<section id="p6" class="screen"><h2>FASE 06 / INTERROGATORIO</h2><p>Solo 3 preguntas. Cada una consume una oportunidad.</p><div id="suspects" class="grid"></div><p>PREGUNTAS: <b id="qc">0 / 3</b></p><div id="answers" class="panel"></div><button id="ib" disabled onclick="seal(6)">CERRAR INTERROGATORIO</button></section>
-<section id="p7" class="screen"><h2>FASE 07 / NUEVA INFORMACIÓN</h2><article class="panel"><h3>ACTUALIZACIÓN 09:11 // HASH DETECTADO</h3><p>Una copia distribuida no coincide con el archivo original. La nueva información puede confirmar una hipótesis o demostrar que una prueba fue alterada.</p></article><div id="updates" class="grid"></div><button id="ub" disabled onclick="seal(7)">SELLAR INTERPRETACIÓN</button></section>
-<section id="p8" class="screen"><h2>FASE 08 / INTERVENCIÓN</h2><p>Seleccionen exactamente 4 acciones. Las combinaciones producen consecuencias.</p><div id="actions" class="grid"></div><div class="metrics"><span>ALCANCE <b id="reach">50</b></span><span>RIESGO <b id="risk">50</b></span><span>EVIDENCIA <b id="proof">50</b></span><span>CONFIANZA <b id="trust">50</b></span></div><p>ACCIONES: <b id="ac">0 / 4</b></p><button id="ab" disabled onclick="seal(8)">SELLAR INTERVENCIÓN</button></section>
-<section id="p9" class="screen"><h2>FASE 09 / ÉTICA</h2><p>La evidencia más fuerte contiene datos personales.</p><div id="ethics" class="grid"></div><button id="ethb" disabled onclick="seal(9)">SELLAR DECISIÓN ÉTICA</button></section>
-<section id="p10" class="screen"><h2>FASE 10 / RESOLUCIÓN</h2><p>Construyan una conclusión compatible con las pruebas y decisiones anteriores.</p><div id="verdict" class="grid"></div><textarea id="report" placeholder="Informe forense final: hechos, evidencias, contradicciones, incertidumbres, decisiones y justificación ética..."></textarea><p>Mínimo: 80 palabras.</p><button id="fb" disabled onclick="finish()">CERRAR CASO</button></section>
-<section id="finish" class="screen"><article class="panel final"><em>PROTOCOLO COMPLETADO</em><h2>CASO CERRADO</h2><pre>> TRANSMISIÓN ................ OK
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CASO 404 // BLACKOUT</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         ENCABEZADO
+         ===================================================== -->
+
+    <header>
+
+        <div>
+            <b>● SISTEMA ACTIVO // BLACKOUT</b>
+
+            <h1>CASO 404 // PROTOCOLO ORÁCULO</h1>
+
+            <small>
+                SIMULACIÓN FORENSE DE CRISIS DIGITAL
+            </small>
+        </div>
+
+
+        <div class="clock">
+
+            <small>TIEMPO</small>
+
+            <strong id="timer">
+                18:00
+            </strong>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         BARRA DE PROGRESO
+         ===================================================== -->
+
+    <div class="bar">
+        <i id="progress"></i>
+    </div>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+         ===================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             INICIO
+             ================================================= -->
+
+        <section id="start" class="screen active">
+
+            <article class="panel danger">
+
+                <em>
+                    NIVEL BLACKOUT // EXTREMO
+                </em>
+
+                <h2>
+                    PROTOCOLO ORÁCULO
+                </h2>
+
+                <p>
+                    Un incidente digital está propagándose
+                    dentro de una comunidad educativa.
+                    Hay capturas, registros, testimonios
+                    y archivos que no coinciden entre sí.
+                </p>
+
+                <p>
+                    Reconstruyan la cadena, detecten anomalías,
+                    investiguen fuentes y decidan cómo intervenir.
+                </p>
+
+                <div class="warning">
+                    ⚠ LAS DECISIONES SELLADAS SON IRREVERSIBLES.
+                    EL PUNTAJE ESTÁ OCULTO.
+                </div>
+
+            </article>
+
+
+            <article class="panel">
+
+                <h3>
+                    IDENTIFICACIÓN
+                </h3>
+
+                <label for="group">
+                    Nombre del grupo
+                </label>
+
+                <input id="group">
+
+
+                <label for="members">
+                    Integrantes
+                </label>
+
+                <textarea id="members"></textarea>
+
+
+                <button onclick="startGame()">
+                    INICIAR PROTOCOLO
+                </button>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             FASE 01
+             ================================================= -->
+
+        <section id="p1" class="screen">
+
+            <h2>
+                FASE 01 / RECONSTRUCCIÓN
+            </h2>
+
+            <p>
+                Analicen la secuencia.
+                El orden temporal no implica causalidad.
+            </p>
+
+            <div id="timeline" class="grid"></div>
+
+            <button onclick="seal(1)">
+                SELLAR RECONSTRUCCIÓN
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             FASE 02
+             ================================================= -->
+
+        <section id="p2" class="screen">
+
+            <h2>
+                FASE 02 / FORENSE
+            </h2>
+
+            <p>
+                Seleccionen exactamente 6 evidencias.
+            </p>
+
+            <div id="evidence" class="grid"></div>
+
+            <p>
+                SELECCIONADAS:
+                <b id="ec">0 / 6</b>
+            </p>
+
+            <button
+                id="eb"
+                disabled
+                onclick="seal(2)"
+            >
+                SELLAR EVIDENCIAS
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             FASE 03
+             ================================================= -->
+
+        <section id="p3" class="screen">
+
+            <h2>
+                FASE 03 / CRUCE
+            </h2>
+
+            <p>
+                Seleccionen 4 relaciones que consideren demostradas.
+            </p>
+
+            <div id="cross" class="grid"></div>
+
+            <p>
+                RELACIONES:
+                <b id="cc">0 / 4</b>
+            </p>
+
+            <button
+                id="cb"
+                disabled
+                onclick="seal(3)"
+            >
+                SELLAR MATRIZ
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             FASE 04
+             ================================================= -->
+
+        <section id="p4" class="screen">
+
+            <h2>
+                FASE 04 / CONTRADICCIONES
+            </h2>
+
+            <p>
+                Seleccionen 3 contradicciones reales.
+            </p>
+
+            <div id="contr" class="grid"></div>
+
+            <p>
+                CONTRADICCIONES:
+                <b id="kc">0 / 3</b>
+            </p>
+
+            <button
+                id="kb"
+                disabled
+                onclick="seal(4)"
+            >
+                SELLAR CONTRADICCIONES
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             FASE 05
+             ================================================= -->
+
+        <section id="p5" class="screen">
+
+            <h2>
+                FASE 05 / HIPÓTESIS
+            </h2>
+
+            <p>
+                Elijan una hipótesis y 3 evidencias.
+                Registren una anomalía si detectaron alguna.
+            </p>
+
+            <div id="hyp" class="grid"></div>
+
+            <div id="he" class="grid"></div>
+
+            <textarea
+                id="anomaly"
+                placeholder="Anomalía detectada..."
+            ></textarea>
+
+            <button
+                id="hb"
+                disabled
+                onclick="seal(5)"
+            >
+                SELLAR HIPÓTESIS
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             FASE 06
+             ================================================= -->
+
+        <section id="p6" class="screen">
+
+            <h2>
+                FASE 06 / INTERROGATORIO
+            </h2>
+
+            <p>
+                Solo 3 preguntas.
+                Cada una consume una oportunidad.
+            </p>
+
+            <div id="suspects" class="grid"></div>
+
+            <p>
+                PREGUNTAS:
+                <b id="qc">0 / 3</b>
+            </p>
+
+            <div id="answers" class="panel"></div>
+
+            <button
+                id="ib"
+                disabled
+                onclick="seal(6)"
+            >
+                CERRAR INTERROGATORIO
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             FASE 07
+             ================================================= -->
+
+        <section id="p7" class="screen">
+
+            <h2>
+                FASE 07 / NUEVA INFORMACIÓN
+            </h2>
+
+            <article class="panel">
+
+                <h3>
+                    ACTUALIZACIÓN 09:11 // HASH DETECTADO
+                </h3>
+
+                <p>
+                    Una copia distribuida no coincide con
+                    el archivo original. La nueva información
+                    puede confirmar una hipótesis o demostrar
+                    que una prueba fue alterada.
+                </p>
+
+            </article>
+
+            <div id="updates" class="grid"></div>
+
+            <button
+                id="ub"
+                disabled
+                onclick="seal(7)"
+            >
+                SELLAR INTERPRETACIÓN
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             FASE 08
+             ================================================= -->
+
+        <section id="p8" class="screen">
+
+            <h2>
+                FASE 08 / INTERVENCIÓN
+            </h2>
+
+            <p>
+                Seleccionen exactamente 4 acciones.
+                Las combinaciones producen consecuencias.
+            </p>
+
+            <div id="actions" class="grid"></div>
+
+
+            <!-- MÉTRICAS -->
+
+            <div class="metrics">
+
+                <span>
+                    ALCANCE
+                    <b id="reach">50</b>
+                </span>
+
+                <span>
+                    RIESGO
+                    <b id="risk">50</b>
+                </span>
+
+                <span>
+                    EVIDENCIA
+                    <b id="proof">50</b>
+                </span>
+
+                <span>
+                    CONFIANZA
+                    <b id="trust">50</b>
+                </span>
+
+            </div>
+
+
+            <p>
+                ACCIONES:
+                <b id="ac">0 / 4</b>
+            </p>
+
+            <button
+                id="ab"
+                disabled
+                onclick="seal(8)"
+            >
+                SELLAR INTERVENCIÓN
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             FASE 09
+             ================================================= -->
+
+        <section id="p9" class="screen">
+
+            <h2>
+                FASE 09 / ÉTICA
+            </h2>
+
+            <p>
+                La evidencia más fuerte contiene datos personales.
+            </p>
+
+            <div id="ethics" class="grid"></div>
+
+            <button
+                id="ethb"
+                disabled
+                onclick="seal(9)"
+            >
+                SELLAR DECISIÓN ÉTICA
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             FASE 10
+             ================================================= -->
+
+        <section id="p10" class="screen">
+
+            <h2>
+                FASE 10 / RESOLUCIÓN
+            </h2>
+
+            <p>
+                Construyan una conclusión compatible con
+                las pruebas y decisiones anteriores.
+            </p>
+
+            <div id="verdict" class="grid"></div>
+
+
+            <!-- INFORME FINAL -->
+
+            <textarea
+                id="report"
+                placeholder="Informe forense final: hechos, evidencias, contradicciones, incertidumbres, decisiones y justificación ética..."
+            ></textarea>
+
+            <p>
+                Mínimo:
+                <b>80 caracteres.</b>
+            </p>
+
+            <button
+                id="fb"
+                disabled
+                onclick="finish()"
+            >
+                CERRAR CASO
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             PANTALLA FINAL
+             ================================================= -->
+
+        <section id="finish" class="screen">
+
+            <article class="panel final">
+
+                <em>
+                    PROTOCOLO COMPLETADO
+                </em>
+
+                <h2>
+                    CASO CERRADO
+                </h2>
+
+                <pre>> TRANSMISIÓN ................ OK
 > REGISTRO FORENSE ........... OK
 > DECISIONES SELLADAS ........ OK
-> EVALUACIÓN ................. RESERVADA</pre><h3>RESULTADO RESERVADO</h3><p>El puntaje no se muestra a los participantes.</p></article></section>
-</main><div id="overlay" class="overlay"><div><big>🔒</big><h2>DECISIÓN SELLADA</h2><p id="lockmsg">Esta decisión es irreversible.</p><button onclick="continueLock()">CONTINUAR</button></div></div><script src="script.js"></script></body></html>
+> EVALUACIÓN ................. RESERVADA</pre>
+
+                <h3>
+                    RESULTADO RESERVADO
+                </h3>
+
+                <p>
+                    El puntaje no se muestra a los participantes.
+                </p>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         VENTANA DE DECISIÓN SELLADA
+         ===================================================== -->
+
+    <div id="overlay" class="overlay">
+
+        <div>
+
+            <big>
+                🔒
+            </big>
+
+            <h2>
+                DECISIÓN SELLADA
+            </h2>
+
+            <p id="lockmsg">
+                Esta decisión es irreversible.
+            </p>
+
+            <button onclick="continueLock()">
+                CONTINUAR
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
