@@ -1,0 +1,2298 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CASO 404 // BLACKOUT</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+:root{--bg:#070a0f;--panel:#0e131b;--panel2:#111925;--line:#253246;--text:#e7edf5;--muted:#8290a3;--cyan:#45d6ff;--cyan2:#1b91b9;--green:#65e6a1;--red:#ff647c;--shadow:0 16px 50px rgba(0,0,0,.35)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 15% 0%,#10202d 0,transparent 32%),radial-gradient(circle at 90% 10%,#171124 0,transparent 28%),var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:32px 32px}
+.topbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:18px 5%;background:rgba(7,10,15,.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.brand h1{font:700 34px 'Barlow Condensed',sans-serif;letter-spacing:1px;margin:5px 0}.brand h1 b{color:var(--cyan)}.brand p,.status,.timerBox small,.progressInfo,.heroTag,.sectionTitle small{font:600 11px 'Barlow Condensed',sans-serif;letter-spacing:1.5px;color:var(--muted)}.status{color:var(--green);display:flex;gap:8px;align-items:center}.status span{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.timerBox{min-width:155px;text-align:center;border:1px solid var(--line);padding:10px 18px;background:#0b1119;box-shadow:var(--shadow)}.timerBox strong{display:block;font:700 32px 'Barlow Condensed',sans-serif;color:var(--cyan);letter-spacing:2px}.progressWrap{max-width:1180px;margin:0 auto;padding:13px 4% 0}.progressBar{height:5px;background:#17202c;border-radius:10px;overflow:hidden}.progressBar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan2),var(--cyan));transition:.4s}.progressInfo{display:flex;justify-content:space-between;padding:7px 1px}
+main{width:min(1180px,90%);margin:42px auto 80px}.screen{display:none;animation:appear .35s ease}.screen.active{display:block}@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hero,.panel,.choice,.updateNotice,.decisionBox{border:1px solid var(--line);background:linear-gradient(145deg,rgba(17,25,37,.96),rgba(10,14,21,.96));box-shadow:var(--shadow)}.hero{padding:44px;margin-bottom:24px;position:relative;overflow:hidden}.hero:after{content:"404";position:absolute;right:25px;bottom:-35px;font:700 170px 'Barlow Condensed';color:rgba(69,214,255,.035)}.heroTag{color:var(--cyan)}.hero h2{font:700 clamp(34px,5vw,64px) 'Barlow Condensed';line-height:.95;max-width:850px;margin:15px 0}.hero p{color:#aab5c4;max-width:800px;line-height:1.7}.mission{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}.mission div{padding:16px;border:1px solid var(--line);background:#0a1018}.mission b{color:var(--cyan);font:700 25px 'Barlow Condensed';display:block}.mission span{font-size:12px;color:var(--muted)}
+.formPanel{padding:28px}.sectionTitle{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:18px}.sectionTitle span{font:700 18px 'Barlow Condensed';letter-spacing:1px;color:var(--cyan)}label{display:block;margin:15px 0 7px;color:#aab5c4;font-size:13px}input,textarea{width:100%;border:1px solid #2c3b4f;background:#080d14;color:var(--text);padding:13px;font:inherit;outline:none;resize:vertical;border-radius:4px}input:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(69,214,255,.08)}textarea{min-height:110px}.rules{margin:22px 0;padding:17px;border-left:3px solid var(--cyan);background:#0a111a;color:#98a6b7;font-size:13px;line-height:1.6}.rules b{color:var(--text)}
+.primary{border:0;background:var(--cyan);color:#031018;padding:13px 19px;font-weight:800;cursor:pointer;border-radius:4px;transition:.2s}.primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 30px rgba(69,214,255,.18)}.primary:disabled{opacity:.3;cursor:not-allowed}
+.phaseHead{display:flex;gap:18px;align-items:flex-start;margin-bottom:22px}.phaseHead>span{font:700 58px/.8 'Barlow Condensed';color:rgba(69,214,255,.25)}.phaseHead h2{font:700 38px/.9 'Barlow Condensed';margin:0;letter-spacing:1px}.phaseHead p{color:var(--muted);margin:8px 0}.instruction{padding:15px 18px;border:1px solid #213247;background:#0a1119;color:#a9b5c5;line-height:1.6;margin-bottom:24px}.instruction b{color:var(--cyan);margin-right:8px}
+.caseBrief{padding:24px;margin-bottom:22px}.caseBriefTag{font:700 11px 'Barlow Condensed';letter-spacing:1.5px;color:var(--cyan);margin-bottom:7px}.caseBrief h3{font:700 28px 'Barlow Condensed';margin:0 0 10px}.caseBrief p{color:#9ca9b9;line-height:1.7;margin:10px 0}.caseBrief strong{color:#dce7f2}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:18px}.choice{padding:22px;cursor:pointer;position:relative;transition:.18s;min-height:165px}.choice:hover{border-color:#41617b;transform:translateY(-2px)}.choice.selected{border-color:var(--cyan);background:linear-gradient(145deg,#102431,#0d1722);box-shadow:inset 3px 0 var(--cyan),0 10px 30px rgba(0,0,0,.2)}.choice.selected:after{content:"✓";position:absolute;right:15px;top:12px;color:var(--green);font-weight:800}.choiceCode{font:700 12px 'Barlow Condensed';color:var(--cyan);letter-spacing:1px}.choice h3{font:700 20px 'Barlow Condensed';margin:9px 0 10px}.choice p{font-size:13px;line-height:1.6;color:#8795a8;margin:0}
+.counter{margin:22px 0 12px;color:var(--muted);font-size:12px;letter-spacing:1px}.counter b{color:var(--cyan);margin-left:7px}.timeline{max-width:900px;margin:0 auto}.sortableItem{display:grid;grid-template-columns:48px 30px 1fr 76px;gap:14px;align-items:center;margin-bottom:14px;padding:18px 20px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(17,25,37,.96),rgba(10,14,21,.96));box-shadow:var(--shadow);cursor:grab;transition:.18s}.sortableItem:hover{border-color:#41617b}.sortableItem.dragging{opacity:.45}.sortableItem.dragOver{border-color:var(--cyan);transform:scale(1.01)}.orderNumber{font:700 28px 'Barlow Condensed';color:var(--cyan);text-align:center}.dragIcon{font-size:22px;color:#617287;text-align:center}.sortableText b{font:700 19px 'Barlow Condensed';letter-spacing:.4px}.sortableText p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.5}.orderButtons{display:flex;gap:6px;justify-content:flex-end}.orderButtons button{width:32px;height:32px;border:1px solid var(--line);background:#0a1119;color:var(--cyan);cursor:pointer;border-radius:4px}.orderButtons button:disabled{opacity:.25;cursor:not-allowed}
+.decisionBox{margin-top:22px;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:var(--muted);font-size:13px}.decisionBox .primary{flex-shrink:0}.answers{margin-top:18px;padding:5px 20px}.answer{padding:16px 0;border-bottom:1px solid var(--line)}.answer:last-child{border-bottom:0}.answer b{color:var(--cyan);display:block}.answer span{display:block;color:#c1cad5;margin:5px 0}.answer p{color:var(--muted);margin:0;line-height:1.5}
+.subsectionTitle{display:flex;align-items:center;gap:13px;margin:26px 0 14px;padding:14px 16px;border:1px solid var(--line);background:#0a1119}.subsectionTitle>span{font:700 22px 'Barlow Condensed';color:var(--cyan)}.subsectionTitle b{display:block;font:700 17px 'Barlow Condensed';letter-spacing:.8px}.subsectionTitle small{display:block;margin-top:3px;color:var(--muted);font-size:11px}.evidenceSubsection{margin-top:32px}.updateNotice{padding:20px;margin-bottom:18px}.updateNotice b{color:var(--cyan)}.updateNotice p{color:var(--muted);line-height:1.6;margin-bottom:0}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0}.metrics div{padding:18px;background:#0a1119;border:1px solid var(--line);text-align:center}.metrics span{display:block;color:var(--muted);font-size:10px;letter-spacing:1.3px}.metrics b{font:700 30px 'Barlow Condensed';color:var(--cyan);display:block;margin-top:4px}.report{min-height:180px;margin-top:20px}.reportCount{font-size:11px;color:var(--muted);margin:7px 0 15px;text-align:right}.reportCount span{color:var(--cyan);font-weight:800}.empty{grid-column:1/-1;padding:20px;border:1px dashed var(--line);color:var(--muted)}
+.final{text-align:center;padding:80px 20px}.successIcon{margin:auto auto 20px;width:70px;height:70px;border:1px solid var(--green);border-radius:50%;display:grid;place-items:center;color:var(--green);font-size:32px}.final h2{font:700 65px 'Barlow Condensed';margin:10px}.final p{color:var(--muted)}.terminal{max-width:600px;margin:30px auto;text-align:left;border:1px solid var(--line);padding:18px;background:#05090e}.terminal p{font-family:monospace;color:var(--green);margin:7px 0}.phaseToast{position:fixed;left:50%;top:50%;transform:translate(-50%,-45%) scale(.96);opacity:0;pointer-events:none;z-index:60;padding:13px 22px;border:1px solid var(--cyan);background:rgba(8,15,23,.96);color:var(--cyan);font:700 15px 'Barlow Condensed',sans-serif;letter-spacing:2px;box-shadow:0 15px 60px rgba(0,0,0,.45)}.phaseToast.show{animation:phaseToast .7s ease forwards}@keyframes phaseToast{0%{opacity:0;transform:translate(-50%,-45%) scale(.96)}20%{opacity:1;transform:translate(-50%,-50%) scale(1)}80%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-55%) scale(1.02)}}
+@media(max-width:700px){.topbar{padding:14px 4%;gap:12px}.brand h1{font-size:27px}.timerBox{min-width:125px}.timerBox strong{font-size:26px}main{width:92%;margin-top:28px}.hero{padding:28px 20px}.hero h2{font-size:42px}.mission{grid-template-columns:repeat(2,1fr)}.phaseHead h2{font-size:31px}.phaseHead>span{font-size:45px}.metrics{grid-template-columns:repeat(2,1fr)}.decisionBox{align-items:stretch;flex-direction:column}.timeline{width:100%}.sortableItem{grid-template-columns:35px 22px 1fr;gap:10px;padding:15px}.orderButtons{grid-column:1/-1;justify-content:flex-start}.sortableText p{font-size:12px}.grid{gap:15px}.choice{min-height:150px;padding:19px}}
+
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="status"><span></span> SISTEMA ACTIVO</div>
+      <h1>CASO 404 <b>// BLACKOUT</b></h1>
+      <p>PROTOCOLO ORÁCULO · SIMULACIÓN FORENSE</p>
+    </div>
+    <div class="timerBox">
+      <small>TIEMPO RESTANTE</small>
+      <strong id="timer">20:00</strong>
+    </div>
+  </header>
+
+  <div class="progressWrap">
+    <div class="progressBar"><i id="progress"></i></div>
+    <div class="progressInfo"><span id="phaseLabel">PREPARACIÓN</span><span id="phaseNumber">0 / 10</span></div>
+  </div>
+
+  <main>
+    <section id="start" class="screen active">
+      <div class="hero">
+        <div class="heroTag">NIVEL BLACKOUT · INVESTIGACIÓN CRÍTICA</div>
+        <h2>Reconstruyan el caso sin confundir sospecha con evidencia.</h2>
+        <p>Una cadena de archivos, capturas y mensajes circuló dentro de una comunidad educativa. Los registros no coinciden completamente y algunas pruebas pueden haber sido modificadas.</p>
+        <div class="mission">
+          <div><b>01</b><span>Ordenar hechos</span></div>
+          <div><b>02</b><span>Separar pruebas de rumores</span></div>
+          <div><b>03</b><span>Cruzar información</span></div>
+          <div><b>04</b><span>Justificar decisiones</span></div>
+        </div>
+      </div>
+
+      <div class="panel formPanel">
+        <div class="sectionTitle"><span>IDENTIFICACIÓN</span><small>ANTES DE COMENZAR</small></div>
+        <label for="group">Nombre del grupo</label>
+        <input id="group" autocomplete="off" placeholder="Ej.: Grupo 4">
+
+        <label for="members">Integrantes</label>
+        <textarea id="members" placeholder="Escriban los nombres de todos los integrantes"></textarea>
+
+        <div class="rules">
+          <b>¿Cómo se juega?</b>
+          <p>Lean cada fase antes de decidir. Las selecciones múltiples se pueden cambiar hasta que presionen <strong>SELLAR</strong>. En las decisiones únicas también podrán cambiar de opinión antes de sellar. Piensen qué demuestra realmente cada dato y qué solamente sugiere.</p>
+        </div>
+
+        <button class="primary" onclick="startGame()">INICIAR PROTOCOLO <span>→</span></button>
+      </div>
+    </section>
+
+    <section id="p1" class="screen">
+      <div class="phaseHead"><span>01</span><div><h2>ANALIZAR</h2><p>Antes de evaluar evidencias, reconstruyan qué ocurrió y qué puede afirmarse realmente.</p></div></div>
+      <article class="caseBrief panel">
+        <div class="caseBriefTag">RESUMEN DEL CASO</div>
+        <h3>¿Qué ocurrió?</h3>
+        <p>Dentro de una comunidad educativa comenzó a circular una captura relacionada con material institucional. Primero apareció una copia del archivo, luego se detectaron modificaciones y distintas personas comenzaron a reenviarlo. Más tarde la publicación original desapareció y comenzaron las acusaciones sobre quién habría iniciado la difusión.</p>
+        <p>El problema es que los registros no son completamente consistentes: algunas copias fueron modificadas, ciertos mensajes llegaron después de que ya existiera circulación y varias acusaciones se basan en información indirecta. Su tarea es reconstruir la secuencia <strong>sin confundir que algo haya ocurrido antes con que necesariamente haya causado lo siguiente</strong>.</p>
+      </article>
+      <div class="instruction"><b>OBJETIVO</b> Los ocho acontecimientos aparecen sin horario y en un orden alterado. Ordénenlos según lo que pueda sostenerse con la información disponible. Pueden arrastrarlos o usar las flechas. Al sellar, el orden se incorporará al puntaje reservado.</div>
+      <div id="timeline" class="timeline"></div>
+      <div class="decisionBox"><span>Cuando hayan reconstruido la secuencia y discutido qué se puede afirmar con seguridad:</span><button class="primary" onclick="seal(1)">SELLAR ANÁLISIS →</button></div>
+    </section>
+
+    <section id="p2" class="screen">
+      <div class="phaseHead"><span>02</span><div><h2>FORENSE</h2><p>Clasifiquen qué información merece peso probatorio.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Seleccionen exactamente <strong>6 evidencias</strong>. Pueden cambiar la selección antes de sellar.</div>
+      <div id="evidence" class="grid"></div>
+      <div class="counter">SELECCIONADAS <b id="ec">0 / 6</b></div>
+      <button id="eb" class="primary" disabled onclick="seal(2)">SELLAR EVIDENCIAS →</button>
+    </section>
+
+    <section id="p3" class="screen">
+      <div class="phaseHead"><span>03</span><div><h2>CRUCE</h2><p>Relacionen datos que, juntos, permitan una interpretación más sólida.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Seleccionen <strong>4 relaciones</strong> que consideren demostradas. Una relación no significa que ambos datos prueben por sí solos una autoría.</div>
+      <div id="cross" class="grid"></div>
+      <div class="counter">RELACIONES <b id="cc">0 / 4</b></div>
+      <button id="cb" class="primary" disabled onclick="seal(3)">SELLAR MATRIZ →</button>
+    </section>
+
+    <section id="p4" class="screen">
+      <div class="phaseHead"><span>04</span><div><h2>CONTRADICCIONES</h2><p>Detecten inconsistencias y no las descarten porque incomoden una hipótesis.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Seleccionen <strong>3 contradicciones reales</strong>. Diferencien una contradicción de una simple diferencia de contexto.</div>
+      <div id="contr" class="grid"></div>
+      <div class="counter">CONTRADICCIONES <b id="kc">0 / 3</b></div>
+      <button id="kb" class="primary" disabled onclick="seal(4)">SELLAR CONTRADICCIONES →</button>
+    </section>
+
+    <section id="p5" class="screen">
+      <div class="phaseHead"><span>05</span><div><h2>HIPÓTESIS</h2><p>Construyan una explicación que pueda convivir con las pruebas y sus límites.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Primero elijan <strong>una hipótesis</strong>. Después seleccionen <strong>3 evidencias de las que eligieron en la fase 02</strong> que realmente la respalden. Si detectaron una anomalía, escríbanla.</div>
+
+      <div class="subsectionTitle"><span>01</span><div><b>HIPÓTESIS DEL CASO</b><small>Elijan una sola explicación</small></div></div>
+      <div id="hyp" class="grid"></div>
+
+      <div class="subsectionTitle evidenceSubsection"><span>02</span><div><b>EVIDENCIAS QUE LA RESPALDAN</b><small>Solo aparecen las 6 evidencias seleccionadas en la Fase 02</small></div></div>
+      <div id="he" class="grid"></div>
+
+      <div class="subsectionTitle evidenceSubsection"><span>03</span><div><b>ANOMALÍA O LÍMITE</b><small>Dato que no encaja o que no puede demostrarse</small></div></div>
+      <textarea id="anomaly" placeholder="Anomalía detectada (opcional): ¿qué dato no encaja o qué no puede demostrarse?"></textarea>
+      <button id="hb" class="primary" disabled onclick="seal(5)">SELLAR HIPÓTESIS →</button>
+    </section>
+
+    <section id="p6" class="screen">
+      <div class="phaseHead"><span>06</span><div><h2>INTERROGATORIO</h2><p>Usen preguntas estratégicas para reducir incertidumbre.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Solo tienen <strong>3 oportunidades</strong>. Elijan las personas cuyas respuestas puedan modificar su interpretación del caso.</div>
+      <div id="suspects" class="grid"></div>
+      <div class="counter">PREGUNTAS <b id="qc">0 / 3</b></div>
+      <div id="answers" class="answers panel"></div>
+      <button id="ib" class="primary" disabled onclick="seal(6)">CERRAR INTERROGATORIO →</button>
+    </section>
+
+    <section id="p7" class="screen">
+      <div class="phaseHead"><span>07</span><div><h2>NUEVA INFORMACIÓN</h2><p>Una actualización puede reforzar o romper la lectura que construyeron.</p></div></div>
+      <article class="updateNotice"><b>ACTUALIZACIÓN 09:11 // HASH DETECTADO</b><p>Una copia distribuida no coincide con el archivo original. La nueva información puede confirmar una hipótesis o demostrar que una prueba fue alterada.</p></article>
+      <div class="instruction"><b>OBJETIVO</b> Elijan la respuesta que mejor represente cómo deberían tratar esta información. Pueden cambiarla hasta sellar.</div>
+      <div id="updates" class="grid"></div>
+      <button id="ub" class="primary" disabled onclick="seal(7)">SELLAR INTERPRETACIÓN →</button>
+    </section>
+
+    <section id="p8" class="screen">
+      <div class="phaseHead"><span>08</span><div><h2>INTERVENCIÓN</h2><p>Decidan qué hacer sin perder de vista evidencia, riesgo, alcance y confianza.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Seleccionen exactamente <strong>4 acciones</strong>. Observen cómo cambia el equilibrio de las métricas. No existe una acción sin consecuencias.</div>
+      <div id="actions" class="grid"></div>
+      <div class="metrics">
+        <div><span>ALCANCE</span><b id="reach">50</b></div>
+        <div><span>RIESGO</span><b id="risk">50</b></div>
+        <div><span>EVIDENCIA</span><b id="proof">50</b></div>
+        <div><span>CONFIANZA</span><b id="trust">50</b></div>
+      </div>
+      <div class="counter">ACCIONES <b id="ac">0 / 4</b></div>
+      <button id="ab" class="primary" disabled onclick="seal(8)">SELLAR INTERVENCIÓN →</button>
+    </section>
+
+    <section id="p9" class="screen">
+      <div class="phaseHead"><span>09</span><div><h2>ÉTICA</h2><p>La mejor evidencia no siempre es la que se puede publicar.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Elijan una decisión ética. Consideren privacidad, proporcionalidad, protección de personas y necesidad de conservar evidencia.</div>
+      <div id="ethics" class="grid"></div>
+      <button id="ethb" class="primary" disabled onclick="seal(9)">SELLAR DECISIÓN ÉTICA →</button>
+    </section>
+
+    <section id="p10" class="screen">
+      <div class="phaseHead"><span>10</span><div><h2>RESOLUCIÓN</h2><p>Construyan una conclusión compatible con todo lo que descubrieron.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Elijan una conclusión y escriban un informe de al menos <strong>80 caracteres</strong>. Incluyan hechos, evidencias, contradicciones, incertidumbres, decisiones y justificación ética.</div>
+      <div id="verdict" class="grid"></div>
+      <textarea id="report" class="report" placeholder="Informe forense final..."></textarea>
+      <div class="reportCount"><span id="reportCount">0</span> / 80 caracteres mínimos</div>
+      <button id="fb" class="primary" disabled onclick="finish()">CERRAR CASO →</button>
+    </section>
+
+    <section id="finish" class="screen">
+      <div class="final">
+        <div class="successIcon">✓</div>
+        <div class="heroTag">PROTOCOLO COMPLETADO</div>
+        <h2>CASO CERRADO</h2>
+        <div class="terminal">
+          <p>&gt; TRANSMISIÓN ................ OK</p>
+          <p>&gt; REGISTRO FORENSE ........... OK</p>
+          <p>&gt; DECISIONES SELLADAS ........ OK</p>
+          <p>&gt; EVALUACIÓN ................. RESERVADA</p>
+        </div>
+        <p>El puntaje permanece reservado para los participantes.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="phaseToast" class="phaseToast"></div>
+  <script>
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyp5Ew24ThPgnVmrP9gy5tRgHTPsDen4SptbTzR_KSqqUT--r0JkktunHFJHn3mfHtlmQ/exec";
+
+const TOTAL = 1200;
+
+let left = TOTAL;
+let timer = null;
+let current = 0;
+let started = false;
+
+
+/* =====================================================
+   ESTADO DEL JUEGO
+===================================================== */
+
+const S = {
+
+  group: "",
+  members: "",
+  startAt: null,
+
+  analysisOrder: [],
+  analysisScore: 0,
+
+  evidence: [],
+  cross: [],
+  contr: [],
+
+  hyp: null,
+  hypEvidence: [],
+  anomaly: "",
+
+  questions: [],
+  answers: [],
+
+  update: null,
+
+  actions: [],
+
+  ethics: null,
+
+  verdict: null,
+
+  report: "",
+
+  events: []
+
+};
+
+
+/* =====================================================
+   FASE 01
+   LOS HORARIOS EXISTEN SOLO INTERNAMENTE.
+   NO SE MUESTRAN AL PARTICIPANTE.
+===================================================== */
+
+const timeline = [
+
+  [
+    "T1",
+    "ACCESO",
+    "Una cuenta inicia sesión desde un dispositivo conocido.",
+    "08:07:14"
+  ],
+
+  [
+    "T2",
+    "ARCHIVO",
+    "Se crea una copia local del material.",
+    "08:11:42"
+  ],
+
+  [
+    "T3",
+    "MODIFICACIÓN",
+    "Una copia registra una modificación de metadatos.",
+    "08:16:03"
+  ],
+
+  [
+    "T4",
+    "PRIMER REENVÍO",
+    "Aparece el primer registro de circulación del material.",
+    "08:17:12"
+  ],
+
+  [
+    "T5",
+    "CAPTURA",
+    "Se genera una captura recortada.",
+    "08:24:51"
+  ],
+
+  [
+    "T6",
+    "SEGUNDA CADENA",
+    "El material aparece posteriormente en otro grupo.",
+    "08:31:08"
+  ],
+
+  [
+    "T7",
+    "ELIMINACIÓN",
+    "La publicación original desaparece.",
+    "08:47:33"
+  ],
+
+  [
+    "T8",
+    "ACUSACIÓN",
+    "Comienzan acusaciones sin una prueba concluyente.",
+    "09:05:19"
+  ]
+
+];
+
+
+/* =====================================================
+   EVIDENCIAS
+===================================================== */
+
+const evidence = [
+
+  [
+    "E-01",
+    "Registro de acceso",
+    "Cuenta conocida; no prueba quién tenía el dispositivo."
+  ],
+
+  [
+    "E-02",
+    "Captura recortada",
+    "Sin contexto anterior ni posterior."
+  ],
+
+  [
+    "E-03",
+    "Log de publicación",
+    "Publicación registrada 08:17:12."
+  ],
+
+  [
+    "E-04",
+    "Metadatos IMG-4491",
+    "Modificada 08:16:03."
+  ],
+
+  [
+    "E-05",
+    "Mensaje reenviado",
+    "Afirma recepción previa sin origen."
+  ],
+
+  [
+    "E-06",
+    "Testimonio espectador",
+    "Vio circulación, no primer envío."
+  ],
+
+  [
+    "E-07",
+    "Registro de eliminación",
+    "Original eliminado 08:47:33."
+  ],
+
+  [
+    "E-08",
+    "Comentario anónimo",
+    "Acusa sin aportar prueba."
+  ],
+
+  [
+    "E-09",
+    "Horarios de actividad",
+    "Actividad de varias cuentas 08:10–08:30."
+  ],
+
+  [
+    "E-10",
+    "Encuesta informal",
+    "Mayoría cree que fue una persona."
+  ],
+
+  [
+    "E-11",
+    "Captura completa",
+    "Conserva contexto y fecha."
+  ],
+
+  [
+    "E-12",
+    "Audio transcripto",
+    "“Ya lo tenía otra gente cuando me llegó”."
+  ],
+
+  [
+    "E-13",
+    "Archivo secundario",
+    "Copia sin metadatos verificables."
+  ],
+
+  [
+    "E-14",
+    "Registro de recepción",
+    "Recepción 08:11:58."
+  ],
+
+  [
+    "E-15",
+    "Mensaje posterior",
+    "Dice que recibió “recién” a las 08:19."
+  ],
+
+  [
+    "E-16",
+    "Cadena de reenvíos",
+    "Tres saltos posteriores."
+  ],
+
+  [
+    "E-17",
+    "Captura supuestamente original",
+    "Creación 08:11; modificación 08:26."
+  ],
+
+  [
+    "E-18",
+    "Registro institucional",
+    "Confirma datos personales."
+  ],
+
+  [
+    "E-19",
+    "Hash de archivo",
+    "No coincide con captura difundida."
+  ],
+
+  [
+    "E-20",
+    "Rumor verbal",
+    "“Todos saben quién fue”."
+  ],
+
+  [
+    "E-21",
+    "Historial de edición",
+    "Versión exportada tras primera circulación."
+  ],
+
+  [
+    "E-22",
+    "Captura de perfil",
+    "Relaciona cuenta con grupo, no con publicación."
+  ],
+
+  [
+    "E-23",
+    "Eliminación local",
+    "Copia eliminada 08:49."
+  ],
+
+  [
+    "E-24",
+    "Mensaje de advertencia",
+    "Pide detener reenvíos antes del final de cadena."
+  ]
+
+];
+
+
+/* =====================================================
+   CRUCE
+===================================================== */
+
+const cross = [
+
+  [
+    "C1",
+    "E-03 ↔ E-04",
+    "Publicación y modificación deben cruzarse."
+  ],
+
+  [
+    "C2",
+    "E-14 ↔ E-03",
+    "Recepción previa a publicación visible."
+  ],
+
+  [
+    "C3",
+    "E-16 ↔ E-07",
+    "Cadena y eliminación deben compararse."
+  ],
+
+  [
+    "C4",
+    "E-11 ↔ E-02",
+    "Completa contextualiza recortada."
+  ],
+
+  [
+    "C5",
+    "E-18 ↔ E-08",
+    "Dato personal no vuelve prueba a una acusación."
+  ],
+
+  [
+    "C6",
+    "E-19 ↔ E-17",
+    "Hash y metadatos pueden revelar versiones distintas."
+  ],
+
+  [
+    "C7",
+    "E-09 ↔ E-22",
+    "Actividad/pertenencia no demuestra autoría."
+  ],
+
+  [
+    "C8",
+    "E-20 ↔ E-10",
+    "Dos rumores no son evidencia sólida."
+  ]
+
+];
+
+
+/* =====================================================
+   CONTRADICCIONES
+===================================================== */
+
+const contr = [
+
+  [
+    "K1",
+    "E-03 vs E-14",
+    "Recepción antes de publicación registrada."
+  ],
+
+  [
+    "K2",
+    "E-17 vs E-04",
+    "Tiempos incompatibles."
+  ],
+
+  [
+    "K3",
+    "E-15 vs E-12",
+    "Recepción “recién” frente a circulación previa."
+  ],
+
+  [
+    "K4",
+    "E-22 vs E-03",
+    "Perfil asociado no demuestra publicación."
+  ],
+
+  [
+    "K5",
+    "E-20 vs E-11",
+    "Rumor identifica; captura completa no."
+  ],
+
+  [
+    "K6",
+    "E-19 vs E-13",
+    "Hashes no permiten tratarlos como idénticos."
+  ]
+
+];
+
+
+/* =====================================================
+   HIPÓTESIS
+===================================================== */
+
+const hyps = [
+
+  [
+    "H-A",
+    "AUTORÍA INDIVIDUAL",
+    "Una persona explica casi toda la cadena."
+  ],
+
+  [
+    "H-B",
+    "ACCESO EXTERNO",
+    "Material obtenido/manipulado desde fuera."
+  ],
+
+  [
+    "H-C",
+    "CADENA DE DIFUSIÓN",
+    "Varias decisiones sucesivas producen el incidente."
+  ],
+
+  [
+    "H-D",
+    "EVIDENCIA INSUFICIENTE",
+    "No puede construirse explicación responsable."
+  ]
+
+];
+
+
+/* =====================================================
+   INTERROGATORIO
+===================================================== */
+
+const sus = [
+
+  [
+    "S1",
+    "OPERADOR A",
+    "¿Qué dispositivo utilizaste?",
+    "El registro coincide con un dispositivo conocido, pero no prueba quién lo manipulaba."
+  ],
+
+  [
+    "S2",
+    "OPERADOR B",
+    "¿Cuándo recibiste el archivo?",
+    "Dice 08:12; el registro asociado muestra 08:11:58."
+  ],
+
+  [
+    "S3",
+    "TESTIGO C",
+    "¿Viste el primer envío?",
+    "No. Lo vi cuando ya había sido reenviado."
+  ],
+
+  [
+    "S4",
+    "ADMINISTRADOR D",
+    "¿Por qué se eliminó?",
+    "Tras una advertencia sobre exposición de datos personales."
+  ],
+
+  [
+    "S5",
+    "REMITENTE E",
+    "¿Quién entregó la copia?",
+    "No puede identificarse públicamente sin corroboración."
+  ]
+
+];
+
+
+/* =====================================================
+   NUEVA INFORMACIÓN
+===================================================== */
+
+const updates = [
+
+  [
+    "U-A",
+    "TRATAR COMO PRUEBA DEFINITIVA",
+    "La nueva información parece confirmar una acusación previa."
+  ],
+
+  [
+    "U-B",
+    "ABRIR NUEVA LÍNEA",
+    "La actualización revela una inconsistencia que obliga a revisar."
+  ],
+
+  [
+    "U-C",
+    "IGNORAR",
+    "Llegó tarde y no debería afectar el caso."
+  ],
+
+  [
+    "U-D",
+    "PUBLICAR",
+    "La comunidad debe conocer inmediatamente el nuevo dato."
+  ]
+
+];
+
+
+/* =====================================================
+   INTERVENCIÓN
+===================================================== */
+
+const actions = [
+
+  [
+    "A1",
+    "PRESERVAR EVIDENCIAS",
+    "Originales, cadena de custodia y acceso limitado."
+  ],
+
+  [
+    "A2",
+    "PUBLICAR NOMBRES",
+    "Identificar públicamente a señalados."
+  ],
+
+  [
+    "A3",
+    "RESTRINGIR DIFUSIÓN",
+    "Detener reenvíos sensibles y conservar acceso institucional."
+  ],
+
+  [
+    "A4",
+    "CAMPAÑA EDUCATIVA",
+    "Verificación, contexto y reenvíos responsables."
+  ],
+
+  [
+    "A5",
+    "BORRAR TODO",
+    "Eliminar pruebas para reducir circulación."
+  ],
+
+  [
+    "A6",
+    "DERIVAR INSTITUCIONALMENTE",
+    "Entregar información necesaria a responsables."
+  ],
+
+  [
+    "A7",
+    "COMPARTIR CAPTURA COMPLETA",
+    "Difundir evidencia completa."
+  ],
+
+  [
+    "A8",
+    "ACUSACIÓN PRIVADA",
+    "Acusar directamente sin corroboración."
+  ]
+
+];
+
+
+/* =====================================================
+   ÉTICA
+===================================================== */
+
+const ethics = [
+
+  [
+    "ET-A",
+    "PUBLICAR TODO",
+    "Transparencia por encima de privacidad."
+  ],
+
+  [
+    "ET-B",
+    "OCULTAR NOMBRES Y PUBLICAR",
+    "No identifica, pero mantiene material sensible circulando."
+  ],
+
+  [
+    "ET-C",
+    "MINIMIZAR DATOS Y DERIVAR",
+    "Solo información necesaria, acceso restringido y canal institucional."
+  ],
+
+  [
+    "ET-D",
+    "ELIMINAR PRUEBAS",
+    "Eliminar toda evidencia disponible."
+  ]
+
+];
+
+
+/* =====================================================
+   VEREDICTO
+===================================================== */
+
+const verdicts = [
+
+  [
+    "V-A",
+    "CULPABLE ÚNICO",
+    "Permite señalar públicamente a una persona."
+  ],
+
+  [
+    "V-B",
+    "CADENA RESPONSABLE",
+    "Cadena de decisiones sin convertir sospecha en condena."
+  ],
+
+  [
+    "V-C",
+    "SIN INTERVENCIÓN",
+    "La incertidumbre impide actuar."
+  ],
+
+  [
+    "V-D",
+    "BORRAR Y CERRAR",
+    "Eliminar material y terminar investigación."
+  ],
+
+  [
+    "V-E",
+    "DERIVACIÓN CON PROTECCIÓN",
+    "Intervenir institucionalmente preservando datos."
+  ]
+
+];
+
+
+/* =====================================================
+   REGISTRO
+===================================================== */
+
+function log(type, data = {}) {
+
+  S.events.push({
+
+    time: new Date().toISOString(),
+
+    phase: current,
+
+    type,
+
+    data
+
+  });
+
+}
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+function startGame() {
+
+  S.group =
+    document.getElementById("group").value.trim();
+
+  S.members =
+    document.getElementById("members").value.trim();
+
+
+  if (!S.group || !S.members) {
+
+    alert(
+      "Completen el nombre del grupo y los integrantes."
+    );
+
+    return;
+  }
+
+
+  S.startAt =
+    new Date().toISOString();
+
+
+  started = true;
+
+
+  // Los 8 hechos se muestran inicialmente desordenados.
+  // Los horarios siguen guardados internamente para evaluar el orden correcto.
+  for (let i = timeline.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [timeline[i], timeline[j]] = [timeline[j], timeline[i]];
+  }
+
+
+  log("START");
+
+
+  render();
+
+
+  go(1);
+
+
+  timer =
+    setInterval(tick, 1000);
+
+}
+
+
+/* =====================================================
+   TEMPORIZADOR
+===================================================== */
+
+function tick() {
+
+  left =
+    Math.max(0, left - 1);
+
+
+  const m =
+    Math.floor(left / 60);
+
+
+  const s =
+    left % 60;
+
+
+  document.getElementById("timer").textContent =
+
+    `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+
+  if (left === 0) {
+
+    clearInterval(timer);
+
+    alert(
+      "TIEMPO AGOTADO. Finalicen el protocolo con las decisiones que hayan tomado."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   CAMBIO DE FASE
+===================================================== */
+
+function go(n) {
+
+  current = n;
+
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+
+  const id =
+    n === 0
+      ? "start"
+      : n === 11
+        ? "finish"
+        : `p${n}`;
+
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+
+  const pct =
+
+    n === 0
+      ? 0
+      : n === 11
+        ? 100
+        : ((n - 1) / 10) * 100;
+
+
+  document
+    .getElementById("progress")
+    .style.width = `${pct}%`;
+
+
+  document
+    .getElementById("phaseLabel")
+    .textContent =
+
+      n === 11
+        ? "FINALIZADO"
+        : n === 0
+          ? "PREPARACIÓN"
+          : `FASE ${String(n).padStart(2,"0")}`;
+
+
+  document
+    .getElementById("phaseNumber")
+    .textContent =
+
+      n >= 1 && n <= 10
+        ? `${n} / 10`
+        : "";
+
+
+  log("PHASE_OPEN", { n });
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* =====================================================
+   SELLAR FASE
+===================================================== */
+
+function seal(n) {
+
+  if (n === 1) {
+
+    calculateAnalysisScore();
+
+    S.analysisOrder =
+      timeline.map(x => x[0]);
+
+  }
+
+
+  if (n === 5) {
+
+    S.anomaly =
+      document
+        .getElementById("anomaly")
+        .value
+        .trim();
+
+  }
+
+
+  log(
+
+    "DECISION",
+
+    {
+
+      phase: n,
+
+      snapshot:
+        JSON.parse(
+          JSON.stringify(S)
+        )
+
+    }
+
+  );
+
+
+  showPhaseToast(
+    `FASE ${String(n).padStart(2,"0")} COMPLETADA`
+  );
+
+
+  setTimeout(
+
+    () => go(n + 1),
+
+    700
+
+  );
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showPhaseToast(message) {
+
+  const toast =
+    document.getElementById("phaseToast");
+
+
+  if (!toast) return;
+
+
+  toast.textContent =
+    message;
+
+
+  toast.classList.remove("show");
+
+
+  void toast.offsetWidth;
+
+
+  toast.classList.add("show");
+
+
+  setTimeout(
+
+    () =>
+      toast.classList.remove("show"),
+
+    700
+
+  );
+
+}
+
+
+/* =====================================================
+   TARJETAS
+===================================================== */
+
+function mk(
+  container,
+  a,
+  fn,
+  selected = false
+) {
+
+  const d =
+    document.createElement("article");
+
+
+  d.className =
+    `choice${selected ? " selected" : ""}`;
+
+
+  d.innerHTML = `
+
+    <div class="choiceCode">
+      ${a[0]}
+    </div>
+
+    <h3>
+      ${a[1]}
+    </h3>
+
+    <p>
+      ${a[2]}
+    </p>
+
+  `;
+
+
+  d.onclick =
+    () => fn(d, a);
+
+
+  container.appendChild(d);
+
+
+  return d;
+
+}
+
+
+/* =====================================================
+   MULTIPLE
+===================================================== */
+
+function multi(
+  id,
+  arr,
+  key,
+  count,
+  button,
+  counter,
+  onChange = null
+) {
+
+  const c =
+    document.getElementById(id);
+
+
+  c.innerHTML = "";
+
+
+  arr.forEach(a => {
+
+    mk(
+
+      c,
+
+      a,
+
+      (d, x) => {
+
+        const idx =
+          S[key].indexOf(x[0]);
+
+
+        if (idx >= 0) {
+
+          S[key].splice(idx, 1);
+
+          d.classList.remove(
+            "selected"
+          );
+
+        }
+
+        else {
+
+          if (
+            S[key].length >= count
+          ) {
+
+            return flashLimit(count);
+
+          }
+
+
+          S[key].push(x[0]);
+
+          d.classList.add(
+            "selected"
+          );
+
+        }
+
+
+        document
+          .getElementById(counter)
+          .textContent =
+            `${S[key].length} / ${count}`;
+
+
+        document
+          .getElementById(button)
+          .disabled =
+            S[key].length !== count;
+
+
+        if (onChange) {
+
+          onChange();
+
+        }
+
+      },
+
+      S[key].includes(a[0])
+
+    );
+
+  });
+
+}
+
+
+/* =====================================================
+   SINGLE
+===================================================== */
+
+function single(
+  id,
+  arr,
+  key,
+  button,
+  onChange = null
+) {
+
+  const c =
+    document.getElementById(id);
+
+
+  c.innerHTML = "";
+
+
+  arr.forEach(a => {
+
+    mk(
+
+      c,
+
+      a,
+
+      (d, x) => {
+
+        S[key] =
+          x[0];
+
+
+        [
+          ...c.children
+        ].forEach(el =>
+          el.classList.remove(
+            "selected"
+          )
+        );
+
+
+        d.classList.add(
+          "selected"
+        );
+
+
+        if (button) {
+
+          document
+            .getElementById(button)
+            .disabled = false;
+
+        }
+
+
+        if (onChange) {
+
+          onChange();
+
+        }
+
+      },
+
+      S[key] === a[0]
+
+    );
+
+  });
+
+}
+
+
+/* =====================================================
+   LÍMITE DE SELECCIÓN
+===================================================== */
+
+function flashLimit(n) {
+
+  alert(
+    `Ya seleccionaron ${n} opciones. Para elegir otra, primero desmarquen una.`
+  );
+
+}
+
+
+/* =====================================================
+   FASE 01
+   RENDER DEL ORDEN
+===================================================== */
+
+function renderAnalysis() {
+
+  const c =
+    document.getElementById("timeline");
+
+
+  c.innerHTML = "";
+
+
+  timeline.forEach(
+    (item, index) => {
+
+      const d =
+        document.createElement("article");
+
+
+      d.className =
+        "sortableItem";
+
+
+      d.draggable = true;
+
+
+      d.dataset.id =
+        item[0];
+
+
+      d.innerHTML = `
+
+        <div class="orderNumber">
+          ${index + 1}
+        </div>
+
+        <div class="dragIcon">
+          ☷
+        </div>
+
+        <div class="sortableText">
+
+          <b>
+            ${item[1]}
+          </b>
+
+          <p>
+            ${item[2]}
+          </p>
+
+        </div>
+
+        <div class="orderButtons">
+
+          <button
+            type="button"
+            title="Subir"
+            onclick="moveAnalysis(${index}, -1)"
+            ${index === 0 ? "disabled" : ""}
+          >
+            ↑
+          </button>
+
+          <button
+            type="button"
+            title="Bajar"
+            onclick="moveAnalysis(${index}, 1)"
+            ${index === timeline.length - 1 ? "disabled" : ""}
+          >
+            ↓
+          </button>
+
+        </div>
+
+      `;
+
+
+      d.addEventListener(
+        "dragstart",
+        analysisDragStart
+      );
+
+
+      d.addEventListener(
+        "dragover",
+        analysisDragOver
+      );
+
+
+      d.addEventListener(
+        "dragleave",
+        analysisDragLeave
+      );
+
+
+      d.addEventListener(
+        "drop",
+        analysisDrop
+      );
+
+
+      d.addEventListener(
+        "dragend",
+        analysisDragEnd
+      );
+
+
+      c.appendChild(d);
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   ARRASTRAR
+===================================================== */
+
+let draggedAnalysisId = null;
+
+
+function analysisDragStart(e) {
+
+  draggedAnalysisId =
+    e.currentTarget.dataset.id;
+
+
+  e.currentTarget.classList.add(
+    "dragging"
+  );
+
+
+  e.dataTransfer.effectAllowed =
+    "move";
+
+
+  e.dataTransfer.setData(
+    "text/plain",
+    draggedAnalysisId
+  );
+
+}
+
+
+function analysisDragOver(e) {
+
+  e.preventDefault();
+
+
+  e.currentTarget.classList.add(
+    "dragOver"
+  );
+
+
+  e.dataTransfer.dropEffect =
+    "move";
+
+}
+
+
+function analysisDragLeave(e) {
+
+  e.currentTarget.classList.remove(
+    "dragOver"
+  );
+
+}
+
+
+function analysisDrop(e) {
+
+  e.preventDefault();
+
+
+  const target =
+    e.currentTarget;
+
+
+  target.classList.remove(
+    "dragOver"
+  );
+
+
+  const targetId =
+    target.dataset.id;
+
+
+  if (
+    !draggedAnalysisId ||
+    draggedAnalysisId === targetId
+  ) {
+
+    return;
+
+  }
+
+
+  const from =
+    timeline.findIndex(
+      x => x[0] === draggedAnalysisId
+    );
+
+
+  const to =
+    timeline.findIndex(
+      x => x[0] === targetId
+    );
+
+
+  if (
+    from < 0 ||
+    to < 0
+  ) {
+
+    return;
+
+  }
+
+
+  const moved =
+    timeline.splice(from, 1)[0];
+
+
+  timeline.splice(
+    to,
+    0,
+    moved
+  );
+
+
+  renderAnalysis();
+
+}
+
+
+function analysisDragEnd(e) {
+
+  e.currentTarget.classList.remove(
+    "dragging"
+  );
+
+
+  document
+    .querySelectorAll(".sortableItem")
+    .forEach(el =>
+      el.classList.remove(
+        "dragOver"
+      )
+    );
+
+
+  draggedAnalysisId =
+    null;
+
+}
+
+
+/* =====================================================
+   BOTONES ↑ ↓
+===================================================== */
+
+function moveAnalysis(index, direction) {
+
+  const newIndex =
+    index + direction;
+
+
+  if (
+    newIndex < 0 ||
+    newIndex >= timeline.length
+  ) {
+
+    return;
+
+  }
+
+
+  const temp =
+    timeline[index];
+
+
+  timeline[index] =
+    timeline[newIndex];
+
+
+  timeline[newIndex] =
+    temp;
+
+
+  renderAnalysis();
+
+}
+
+
+/* =====================================================
+   PUNTAJE DE ANALIZAR
+===================================================== */
+
+function calculateAnalysisScore() {
+
+  const correctOrder = [
+
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5",
+    "T6",
+    "T7",
+    "T8"
+
+  ];
+
+
+  const currentOrder =
+    timeline.map(
+      x => x[0]
+    );
+
+
+  let correct = 0;
+
+
+  currentOrder.forEach(
+    (id, index) => {
+
+      if (
+        id === correctOrder[index]
+      ) {
+
+        correct++;
+
+      }
+
+    }
+  );
+
+
+  /*
+   * 10 puntos máximos.
+   * Cada posición correcta vale 1,25.
+   */
+
+  S.analysisScore =
+    Math.round(
+      correct * 1.25 * 100
+    ) / 100;
+
+
+  S.analysisOrder =
+    currentOrder;
+
+
+  log(
+
+    "ANALYSIS_RESULT",
+
+    {
+
+      correctPositions:
+        correct,
+
+      score:
+        S.analysisScore,
+
+      order:
+        currentOrder
+
+    }
+
+  );
+
+}
+
+
+/* =====================================================
+   RENDER GENERAL
+===================================================== */
+
+function render() {
+
+  renderAnalysis();
+
+
+  multi(
+    "evidence",
+    evidence,
+    "evidence",
+    6,
+    "eb",
+    "ec"
+  );
+
+
+  multi(
+    "cross",
+    cross,
+    "cross",
+    4,
+    "cb",
+    "cc"
+  );
+
+
+  multi(
+    "contr",
+    contr,
+    "contr",
+    3,
+    "kb",
+    "kc"
+  );
+
+
+  renderHypothesis();
+
+
+  const sc =
+    document.getElementById(
+      "suspects"
+    );
+
+
+  sc.innerHTML = "";
+
+
+  sus.forEach(a => {
+
+    mk(
+
+      sc,
+
+      a,
+
+      (d, x) => {
+
+        if (
+          S.questions.includes(
+            x[0]
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          S.questions.length >= 3
+        ) {
+
+          return alert(
+            "Ya utilizaron las 3 oportunidades."
+          );
+
+        }
+
+
+        S.questions.push(
+          x[0]
+        );
+
+
+        S.answers.push({
+
+          id: x[0],
+
+          question: x[2],
+
+          answer: x[3]
+
+        });
+
+
+        d.classList.add(
+          "selected"
+        );
+
+
+        document
+          .getElementById("qc")
+          .textContent =
+            `${S.questions.length} / 3`;
+
+
+        document
+          .getElementById("answers")
+          .innerHTML += `
+
+            <div class="answer">
+
+              <b>
+                ${x[1]}
+              </b>
+
+              <span>
+                ${x[2]}
+              </span>
+
+              <p>
+                ${x[3]}
+              </p>
+
+            </div>
+
+          `;
+
+
+        document
+          .getElementById("ib")
+          .disabled =
+            S.questions.length !== 3;
+
+      },
+
+      S.questions.includes(
+        a[0]
+      )
+
+    );
+
+  });
+
+
+  single(
+    "updates",
+    updates,
+    "update",
+    "ub"
+  );
+
+
+  multi(
+    "actions",
+    actions,
+    "actions",
+    4,
+    "ab",
+    "ac",
+    updateMetrics
+  );
+
+
+  single(
+    "ethics",
+    ethics,
+    "ethics",
+    "ethb"
+  );
+
+
+  single(
+    "verdict",
+    verdicts,
+    "verdict",
+    null,
+    validate
+  );
+
+
+  document
+    .getElementById("report")
+    .oninput =
+      validate;
+
+
+  updateMetrics();
+
+
+  validate();
+
+}
+
+
+/* =====================================================
+   HIPÓTESIS
+===================================================== */
+
+function renderHypothesis() {
+
+  single(
+    "hyp",
+    hyps,
+    "hyp",
+    null,
+    renderHypEvidence
+  );
+
+
+  renderHypEvidence();
+
+}
+
+
+function renderHypEvidence() {
+
+  const c =
+    document.getElementById("he");
+
+
+  c.innerHTML = "";
+
+
+  S.hypEvidence =
+    S.hypEvidence.filter(
+      id =>
+        S.evidence.includes(id)
+    );
+
+
+  if (!S.hyp) {
+
+    document
+      .getElementById("hb")
+      .disabled = true;
+
+    return;
+
+  }
+
+
+  const available =
+    evidence.filter(
+      e =>
+        S.evidence.includes(
+          e[0]
+        )
+    );
+
+
+  if (!available.length) {
+
+    c.innerHTML = `
+
+      <div class="empty">
+
+        Primero seleccionen evidencias
+        en la Fase 02.
+
+      </div>
+
+    `;
+
+
+    document
+      .getElementById("hb")
+      .disabled = true;
+
+
+    return;
+
+  }
+
+
+  available.forEach(a => {
+
+    mk(
+
+      c,
+
+      a,
+
+      (d, x) => {
+
+        const idx =
+          S.hypEvidence.indexOf(
+            x[0]
+          );
+
+
+        if (idx >= 0) {
+
+          S.hypEvidence.splice(
+            idx,
+            1
+          );
+
+
+          d.classList.remove(
+            "selected"
+          );
+
+        }
+
+        else {
+
+          if (
+            S.hypEvidence.length >= 3
+          ) {
+
+            return flashLimit(3);
+
+          }
+
+
+          S.hypEvidence.push(
+            x[0]
+          );
+
+
+          d.classList.add(
+            "selected"
+          );
+
+        }
+
+
+        document
+          .getElementById("hb")
+          .disabled =
+            S.hypEvidence.length !== 3;
+
+      },
+
+      S.hypEvidence.includes(
+        a[0]
+      )
+
+    );
+
+  });
+
+
+  document
+    .getElementById("hb")
+    .disabled =
+      S.hypEvidence.length !== 3;
+
+}
+
+
+/* =====================================================
+   MÉTRICAS
+===================================================== */
+
+function updateMetrics() {
+
+  let r = 50;
+  let k = 50;
+  let p = 50;
+  let t = 50;
+
+
+  S.actions.forEach(a => {
+
+    if (a === "A1") {
+
+      p += 30;
+      k -= 5;
+      t += 10;
+
+    }
+
+
+    if (a === "A2") {
+
+      r += 25;
+      k += 35;
+      t -= 30;
+
+    }
+
+
+    if (a === "A3") {
+
+      r += 10;
+      k -= 15;
+      t += 15;
+
+    }
+
+
+    if (a === "A4") {
+
+      r += 20;
+      k -= 5;
+      t += 25;
+
+    }
+
+
+    if (a === "A5") {
+
+      p -= 35;
+      k -= 10;
+      t -= 20;
+
+    }
+
+
+    if (a === "A6") {
+
+      k -= 20;
+      t += 30;
+      p += 15;
+
+    }
+
+
+    if (a === "A7") {
+
+      r += 30;
+      k += 25;
+      t -= 20;
+
+    }
+
+
+    if (a === "A8") {
+
+      k += 5;
+      t -= 5;
+
+    }
+
+  });
+
+
+  [
+    ["reach", r],
+    ["risk", k],
+    ["proof", p],
+    ["trust", t]
+
+  ].forEach(
+    ([id, v]) => {
+
+      document
+        .getElementById(id)
+        .textContent =
+          Math.max(
+            0,
+            Math.min(
+              100,
+              v
+            )
+          );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   VALIDAR INFORME
+===================================================== */
+
+function validate() {
+
+  const report =
+    document
+      .getElementById("report")
+      .value
+      .trim();
+
+
+  document
+    .getElementById("reportCount")
+    .textContent =
+      report.length;
+
+
+  document
+    .getElementById("fb")
+    .disabled =
+      !(
+        S.verdict &&
+        report.length >= 80
+      );
+
+}
+
+
+/* =====================================================
+   FINALIZAR
+===================================================== */
+
+function finish() {
+
+  S.report =
+    document
+      .getElementById("report")
+      .value
+      .trim();
+
+
+  S.anomaly =
+    document
+      .getElementById("anomaly")
+      .value
+      .trim();
+
+
+  clearInterval(timer);
+
+
+  const payload = {
+
+    ...S,
+
+    submissionId:
+      "SUB-" +
+      Date.now() +
+      "-" +
+      Math.random()
+        .toString(36)
+        .slice(2, 8),
+
+    timestamp:
+      new Date().toISOString(),
+
+    durationSeconds:
+      TOTAL - left
+
+  };
+
+
+  const button =
+    document.getElementById("fb");
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "TRANSMITIENDO...";
+
+
+  fetch(
+
+    SCRIPT_URL,
+
+    {
+
+      method: "POST",
+
+      mode: "no-cors",
+
+      headers: {
+
+        "Content-Type":
+          "text/plain;charset=utf-8"
+
+      },
+
+      body:
+        JSON.stringify(payload)
+
+    }
+
+  )
+
+  .then(() => {
+
+    go(11);
+
+  })
+
+  .catch(() => {
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "CERRAR CASO →";
+
+
+    alert(
+      "No se pudo transmitir. Avise al docente y conserve una captura."
+    );
+
+  });
+
+}
+</script>
+</body>
+</html>
