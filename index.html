@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CASO 404 // BLACKOUT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="status"><span></span> SISTEMA ACTIVO</div>
+      <h1>CASO 404 <b>// BLACKOUT</b></h1>
+      <p>PROTOCOLO ORÁCULO · SIMULACIÓN FORENSE</p>
+    </div>
+    <div class="timerBox">
+      <small>TIEMPO RESTANTE</small>
+      <strong id="timer">20:00</strong>
+    </div>
+  </header>
+
+  <div class="progressWrap">
+    <div class="progressBar"><i id="progress"></i></div>
+    <div class="progressInfo"><span id="phaseLabel">PREPARACIÓN</span><span id="phaseNumber">0 / 10</span></div>
+  </div>
+
+  <main>
+    <section id="start" class="screen active">
+      <div class="hero">
+        <div class="heroTag">NIVEL BLACKOUT · INVESTIGACIÓN CRÍTICA</div>
+        <h2>Reconstruyan el caso sin confundir sospecha con evidencia.</h2>
+        <p>Una cadena de archivos, capturas y mensajes circuló dentro de una comunidad educativa. Los registros no coinciden completamente y algunas pruebas pueden haber sido modificadas.</p>
+        <div class="mission">
+          <div><b>01</b><span>Ordenar hechos</span></div>
+          <div><b>02</b><span>Separar pruebas de rumores</span></div>
+          <div><b>03</b><span>Cruzar información</span></div>
+          <div><b>04</b><span>Justificar decisiones</span></div>
+        </div>
+      </div>
+
+      <div class="panel formPanel">
+        <div class="sectionTitle"><span>IDENTIFICACIÓN</span><small>ANTES DE COMENZAR</small></div>
+        <label for="group">Nombre del grupo</label>
+        <input id="group" autocomplete="off" placeholder="Ej.: Grupo 4">
+
+        <label for="members">Integrantes</label>
+        <textarea id="members" placeholder="Escriban los nombres de todos los integrantes"></textarea>
+
+        <div class="rules">
+          <b>¿Cómo se juega?</b>
+          <p>Lean cada fase antes de decidir. Las selecciones múltiples se pueden cambiar hasta que presionen <strong>SELLAR</strong>. En las decisiones únicas también podrán cambiar de opinión antes de sellar. Piensen qué demuestra realmente cada dato y qué solamente sugiere.</p>
+        </div>
+
+        <button class="primary" onclick="startGame()">INICIAR PROTOCOLO <span>→</span></button>
+      </div>
+    </section>
+
+    <section id="p1" class="screen">
+      <div class="phaseHead"><span>01</span><div><h2>ANALIZAR</h2><p>Antes de evaluar evidencias, reconstruyan qué ocurrió y qué puede afirmarse realmente.</p></div></div>
+      <article class="caseBrief panel">
+        <div class="caseBriefTag">RESUMEN DEL CASO</div>
+        <h3>¿Qué ocurrió?</h3>
+        <p>Dentro de una comunidad educativa comenzó a circular una captura relacionada con material institucional. Primero apareció una copia del archivo, luego se detectaron modificaciones y distintas personas comenzaron a reenviarlo. Más tarde la publicación original desapareció y comenzaron las acusaciones sobre quién habría iniciado la difusión.</p>
+        <p>El problema es que los registros no son completamente consistentes: algunas copias fueron modificadas, ciertos mensajes llegaron después de que ya existiera circulación y varias acusaciones se basan en información indirecta. Su tarea es reconstruir la secuencia <strong>sin confundir que algo haya ocurrido antes con que necesariamente haya causado lo siguiente</strong>.</p>
+      </article>
+      <div class="instruction"><b>OBJETIVO</b> Los ocho acontecimientos aparecen sin horario y en un orden alterado. Ordénenlos según lo que pueda sostenerse con la información disponible. Pueden arrastrarlos o usar las flechas. Al sellar, el orden se incorporará al puntaje reservado.</div>
+      <div id="timeline" class="timeline"></div>
+      <div class="decisionBox"><span>Cuando hayan reconstruido la secuencia y discutido qué se puede afirmar con seguridad:</span><button class="primary" onclick="seal(1)">SELLAR ANÁLISIS →</button></div>
+    </section>
+
+    <section id="p2" class="screen">
+      <div class="phaseHead"><span>02</span><div><h2>FORENSE</h2><p>Clasifiquen qué información merece peso probatorio.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Seleccionen exactamente <strong>6 evidencias</strong>. Pueden cambiar la selección antes de sellar.</div>
+      <div id="evidence" class="grid"></div>
+      <div class="counter">SELECCIONADAS <b id="ec">0 / 6</b></div>
+      <button id="eb" class="primary" disabled onclick="seal(2)">SELLAR EVIDENCIAS →</button>
+    </section>
+
+    <section id="p3" class="screen">
+      <div class="phaseHead"><span>03</span><div><h2>CRUCE</h2><p>Relacionen datos que, juntos, permitan una interpretación más sólida.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Seleccionen <strong>4 relaciones</strong> que consideren demostradas. Una relación no significa que ambos datos prueben por sí solos una autoría.</div>
+      <div id="cross" class="grid"></div>
+      <div class="counter">RELACIONES <b id="cc">0 / 4</b></div>
+      <button id="cb" class="primary" disabled onclick="seal(3)">SELLAR MATRIZ →</button>
+    </section>
+
+    <section id="p4" class="screen">
+      <div class="phaseHead"><span>04</span><div><h2>CONTRADICCIONES</h2><p>Detecten inconsistencias y no las descarten porque incomoden una hipótesis.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Seleccionen <strong>3 contradicciones reales</strong>. Diferencien una contradicción de una simple diferencia de contexto.</div>
+      <div id="contr" class="grid"></div>
+      <div class="counter">CONTRADICCIONES <b id="kc">0 / 3</b></div>
+      <button id="kb" class="primary" disabled onclick="seal(4)">SELLAR CONTRADICCIONES →</button>
+    </section>
+
+    <section id="p5" class="screen">
+      <div class="phaseHead"><span>05</span><div><h2>HIPÓTESIS</h2><p>Construyan una explicación que pueda convivir con las pruebas y sus límites.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Primero elijan <strong>una hipótesis</strong>. Después seleccionen <strong>3 evidencias de las que eligieron en la fase 02</strong> que realmente la respalden. Si detectaron una anomalía, escríbanla.</div>
+
+      <div class="subsectionTitle"><span>01</span><div><b>HIPÓTESIS DEL CASO</b><small>Elijan una sola explicación</small></div></div>
+      <div id="hyp" class="grid"></div>
+
+      <div class="subsectionTitle evidenceSubsection"><span>02</span><div><b>EVIDENCIAS QUE LA RESPALDAN</b><small>Solo aparecen las 6 evidencias seleccionadas en la Fase 02</small></div></div>
+      <div id="he" class="grid"></div>
+
+      <div class="subsectionTitle evidenceSubsection"><span>03</span><div><b>ANOMALÍA O LÍMITE</b><small>Dato que no encaja o que no puede demostrarse</small></div></div>
+      <textarea id="anomaly" placeholder="Anomalía detectada (opcional): ¿qué dato no encaja o qué no puede demostrarse?"></textarea>
+      <button id="hb" class="primary" disabled onclick="seal(5)">SELLAR HIPÓTESIS →</button>
+    </section>
+
+    <section id="p6" class="screen">
+      <div class="phaseHead"><span>06</span><div><h2>INTERROGATORIO</h2><p>Usen preguntas estratégicas para reducir incertidumbre.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Solo tienen <strong>3 oportunidades</strong>. Elijan las personas cuyas respuestas puedan modificar su interpretación del caso.</div>
+      <div id="suspects" class="grid"></div>
+      <div class="counter">PREGUNTAS <b id="qc">0 / 3</b></div>
+      <div id="answers" class="answers panel"></div>
+      <button id="ib" class="primary" disabled onclick="seal(6)">CERRAR INTERROGATORIO →</button>
+    </section>
+
+    <section id="p7" class="screen">
+      <div class="phaseHead"><span>07</span><div><h2>NUEVA INFORMACIÓN</h2><p>Una actualización puede reforzar o romper la lectura que construyeron.</p></div></div>
+      <article class="updateNotice"><b>ACTUALIZACIÓN 09:11 // HASH DETECTADO</b><p>Una copia distribuida no coincide con el archivo original. La nueva información puede confirmar una hipótesis o demostrar que una prueba fue alterada.</p></article>
+      <div class="instruction"><b>OBJETIVO</b> Elijan la respuesta que mejor represente cómo deberían tratar esta información. Pueden cambiarla hasta sellar.</div>
+      <div id="updates" class="grid"></div>
+      <button id="ub" class="primary" disabled onclick="seal(7)">SELLAR INTERPRETACIÓN →</button>
+    </section>
+
+    <section id="p8" class="screen">
+      <div class="phaseHead"><span>08</span><div><h2>INTERVENCIÓN</h2><p>Decidan qué hacer sin perder de vista evidencia, riesgo, alcance y confianza.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Seleccionen exactamente <strong>4 acciones</strong>. Observen cómo cambia el equilibrio de las métricas. No existe una acción sin consecuencias.</div>
+      <div id="actions" class="grid"></div>
+      <div class="metrics">
+        <div><span>ALCANCE</span><b id="reach">50</b></div>
+        <div><span>RIESGO</span><b id="risk">50</b></div>
+        <div><span>EVIDENCIA</span><b id="proof">50</b></div>
+        <div><span>CONFIANZA</span><b id="trust">50</b></div>
+      </div>
+      <div class="counter">ACCIONES <b id="ac">0 / 4</b></div>
+      <button id="ab" class="primary" disabled onclick="seal(8)">SELLAR INTERVENCIÓN →</button>
+    </section>
+
+    <section id="p9" class="screen">
+      <div class="phaseHead"><span>09</span><div><h2>ÉTICA</h2><p>La mejor evidencia no siempre es la que se puede publicar.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Elijan una decisión ética. Consideren privacidad, proporcionalidad, protección de personas y necesidad de conservar evidencia.</div>
+      <div id="ethics" class="grid"></div>
+      <button id="ethb" class="primary" disabled onclick="seal(9)">SELLAR DECISIÓN ÉTICA →</button>
+    </section>
+
+    <section id="p10" class="screen">
+      <div class="phaseHead"><span>10</span><div><h2>RESOLUCIÓN</h2><p>Construyan una conclusión compatible con todo lo que descubrieron.</p></div></div>
+      <div class="instruction"><b>OBJETIVO</b> Elijan una conclusión y escriban un informe de al menos <strong>80 caracteres</strong>. Incluyan hechos, evidencias, contradicciones, incertidumbres, decisiones y justificación ética.</div>
+      <div id="verdict" class="grid"></div>
+      <textarea id="report" class="report" placeholder="Informe forense final..."></textarea>
+      <div class="reportCount"><span id="reportCount">0</span> / 80 caracteres mínimos</div>
+      <button id="fb" class="primary" disabled onclick="finish()">CERRAR CASO →</button>
+    </section>
+
+    <section id="finish" class="screen">
+      <div class="final">
+        <div class="successIcon">✓</div>
+        <div class="heroTag">PROTOCOLO COMPLETADO</div>
+        <h2>CASO CERRADO</h2>
+        <div class="terminal">
+          <p>&gt; TRANSMISIÓN ................ OK</p>
+          <p>&gt; REGISTRO FORENSE ........... OK</p>
+          <p>&gt; DECISIONES SELLADAS ........ OK</p>
+          <p>&gt; EVALUACIÓN ................. RESERVADA</p>
+        </div>
+        <p>El puntaje permanece reservado para los participantes.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="phaseToast" class="phaseToast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
