@@ -954,8 +954,7 @@ function multi(
   count,
   button,
   counter,
-  onChange = null,
-  lockSelected = false
+  onChange = null
 ) {
 
   const c =
@@ -981,10 +980,6 @@ function multi(
 
         if (idx >= 0) {
 
-          if (lockSelected) {
-            return;
-          }
-
           S[key].splice(idx, 1);
 
           d.classList.remove(
@@ -1009,11 +1004,6 @@ function multi(
           d.classList.add(
             "selected"
           );
-
-          if (lockSelected) {
-            d.classList.add("locked");
-            d.setAttribute("aria-disabled", "true");
-          }
 
         }
 
@@ -1056,8 +1046,7 @@ function single(
   arr,
   key,
   button,
-  onChange = null,
-  lockSelected = false
+  onChange = null
 ) {
 
   const c =
@@ -1676,8 +1665,7 @@ function render() {
     4,
     "ab",
     "ac",
-    updateMetrics,
-    true
+    updateMetrics
   );
 
 
